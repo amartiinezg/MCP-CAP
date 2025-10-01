@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kaniko-build-mcp-server
+  namespace: mcp-server
+spec:
+  template:
+    spec:
+      containers:
+      - name: kaniko
+        image: gcr.io/kaniko-project/executor:latest
+        args:
+        - "--dockerfile=/workspace/Dockerfile"
+        - "--context=git://github.com/amartiinezg/MCP-CAP.git#main"  # CAMBIAR ESTO
+        - "--destination=docker.io/amartiinezg/MCP-CAP:latest"        # CAMBIAR ESTO
+        - "--cache=true"
+        - "--cache-ttl=24h"
+        volumeMounts:
+        - name: dockerfile
+          mountPath: /workspace
+          readOnly: true
+        - name: docker-config
+          mountPath: /kaniko/.docker
+      restartPolicy: Never
+      volumes:
+      - name: dockerfile
+        configMap:
+          name: dockerfile-config
+      - name: docker-config
+        secret:
+          secretName: docker-registry-secret
+          items:
+          - key: .dockerconfigjson
+            path: config.json
+  backoffLimit: 2

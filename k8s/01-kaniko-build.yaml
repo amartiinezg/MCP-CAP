@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dockerfile-config
+  namespace: mcp-server
+data:
+  Dockerfile: |
+    FROM node:18-alpine
+    WORKDIR /app
+    COPY package*.json ./
+    RUN npm ci --only=production
+    COPY . .
+    RUN npm run deploy
+    RUN mkdir -p /app/data
+    RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
+    RUN chown -R nodejs:nodejs /app
+    USER nodejs
+    EXPOSE 4004
+    CMD ["npm", "start"]

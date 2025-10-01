@@ -1,0 +1,23 @@
+apiVersion: gateway.kyma-project.io/v1beta1
+kind: APIRule
+metadata:
+  name: mcp-server
+  namespace: mcp-server
+spec:
+  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  host: mcp-server
+  service:
+    name: mcp-server
+    port: 80
+  rules:
+  - path: /.*
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+    accessStrategies:
+    - handler: allow
+    mutators:
+    - handler: header
+      config:
+        headers:
+          Access-Control-Allow-Origin: "*"
+          Access-Control-Allow-Methods: "GET, POST, OPTIONS"
+          Access-Control-Allow-Headers: "Content-Type, Authorization"
