@@ -1,0 +1,9 @@
+cat > .dockerignore << 'EOF'
+node_modules
+mcp-server.db
+*.log
+.git
+.gitignore
+README.md
+.DS_Store
+EOF

@@ -1,0 +1,29 @@
+{
+  "name": "mcp-server-cap",
+  "version": "1.0.0",
+  "description": "MCP Server with SAP CAP on Kyma",
+  "main": "srv/server.js",
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds watch",
+    "deploy": "cds deploy --to sqlite:mcp-server.db"
+  },
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "@sap/cds-dk": "^7"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": "mcp-server.db"
+        }
+      }
+    }
+  }
+}
