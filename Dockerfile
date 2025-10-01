@@ -5,8 +5,8 @@ WORKDIR /app
 # Copiar archivos de dependencias
 COPY package*.json ./
 
-# Instalar dependencias de producción
-RUN npm ci --only=production
+# Instalar TODAS las dependencias (incluidas dev) para el build
+RUN npm ci
 
 # Copiar código fuente
 COPY . .
@@ -16,6 +16,9 @@ RUN mkdir -p /app/data
 
 # Desplegar base de datos
 RUN npm run deploy
+
+# Limpiar devDependencies después del deploy
+RUN npm prune --production
 
 # Exponer puerto
 EXPOSE 4004

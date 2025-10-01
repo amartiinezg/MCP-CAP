@@ -1,0 +1,13 @@
+applications:
+- name: mcp-server-cap
+  memory: 512M
+  disk_quota: 1024M
+  instances: 1
+  buildpacks:
+    - nodejs_buildpack
+  command: npm start
+  env:
+    NODE_ENV: production
+  health-check-type: http
+  health-check-http-endpoint: /health
+  timeout: 180

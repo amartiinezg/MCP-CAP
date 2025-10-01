@@ -8,6 +8,8 @@ default-*.json
 gen/
 node_modules/
 target/
+.kubeconfig.yaml
+.bin
 
 # Web IDE, App Studio
 .che/

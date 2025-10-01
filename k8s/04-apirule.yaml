@@ -5,7 +5,7 @@ metadata:
   namespace: mcp-server
 spec:
   gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: mcp-server
+  host: mcp-server.c-7c1fc59.kyma.ondemand.com
   service:
     name: mcp-server
     port: 80

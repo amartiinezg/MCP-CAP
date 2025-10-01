@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: mcp-server
-        image: docker.io/amartiinezg/MCP-CAP:latest  # CAMBIAR ESTO
+        image: docker.io/amartiinezg/mcpserver:latest  # CAMBIAR ESTO
         imagePullPolicy: Always
         ports:
         - containerPort: 4004
